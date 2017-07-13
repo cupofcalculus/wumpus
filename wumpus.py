@@ -7,12 +7,12 @@ while player_location == wumpus_location:
     player_location = choice(cave_numbers)
 
 print ("Welcome to Hunt the Wumpus!")
-print ("You can see", len(caves), "caves")
+print ("You can see", len(cave_numbers), "caves")
 print("To play, just type the number")
 print("of the cave you wish to enter next")
 
 while True:
-    print("You are in cave", playerlocation)
+    print("You are in cave", player_location)
     if (player_location == wumpus_location - 1 or
         player_location == wumpus_location + 1):
         print("I smell a wumpus!")
@@ -26,5 +26,5 @@ while True:
     else:
         player_location = int(player_input)
         if player_location == wumpus_location:
-            print("Aargh! You got eaten by a wumpus!)
+            print("Aargh! You got eaten by a wumpus!")
             break
