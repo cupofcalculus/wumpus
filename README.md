@@ -1,6 +1,3 @@
-# wumpus
-Hunt the Wumpus
-
 This code is based on the guided instrustions of the HELLO! PYTHON book by Anthony Briggs from Manning Press.  This is an
 excerpt from that book:
 
