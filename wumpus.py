@@ -1,7 +1,7 @@
 from random import choice
 
 #================================================================
-# Definitions:
+# Definitions and associated variables:
 #================================================================
 
     #================================
@@ -31,9 +31,31 @@ def print_caves():
         print (number, ":", caves[number])
     print ("--------")
 
-    #================================
-    # Cave-creation functions
-    #================================
+    #======================================
+    # Cave-creation functions and variables
+    #======================================
+
+cave_names = [
+    "Arched cavern",
+    "Twisty passages",
+    "Dripping cave",
+    "Dusty crawlspace",
+    "Underground lake",
+    "Black pit",
+    "Fallen cave",
+    "Shallow pool",
+    "Icy underground river",
+    "Sandy hollow",
+    "Old firepit",
+    "Tree root cave",
+    "Narrow ledge",
+    "Winding steps",
+    "Echoing chamber",
+    "Musty cave",
+    "Gloomy cave",
+    "Low ceilinged cave",
+    "Wumpus lair",
+    "Spooky Chasm"]
 
 def setup_caves(cave_numbers):
     """ Create the starting list of caves """
@@ -63,27 +85,32 @@ def finish_caves():
 
 def print_location(player_location):
     """ Tell the player about where they are """
-    print ("You are in cave", player_location)
-    print ("From here, you can see caves:")
-    print (caves[player_location])
-    if wumpus_location in caves[player_location]:
+    print ("You are in cave", cave_names[player_location])
+    print ("From here, you can see:")
+    neighbors = caves[player_location]
+    for tunnel in range(0,3):
+        next_cave = neighbors[tunnel]
+        print ("    ", tunnel + 1, "-", cave_names[next_cave])
+    if wumpus_location in neighbors:
         print ("I smell a wumpus!")
 
 def ask_for_cave():
     """ Ask the player to choose a cave from their current_location. """
-    player_input = input ("Which cave?")
-    if (not player_input.isdigit() or
-        int(player_input) not in caves[player_location]):
+    player_input = input ("Which cave? ")
+    if player_input in ['1', '2', '3']:
+        index = int(player_input) - 1
+        neighbors = caves[player_location]
+        cave_number = neighbors[index]
+        return cave_number
+    else:
         print (player_input + "?")
         print ("That's not a direction that I can see!")
-        return None
-    else:
-        return int(player_input)
+        return False
 
 def get_action():
     """ Find out what the player wants to do next. """
     print ("What do you do next?")
-    print ("    m: move")
+    print ("    m) move")
     print ("    a) fire an arrow")
     action = input (">")
     if action == "m" or action == "a":
@@ -141,7 +168,7 @@ while player_location == wumpus_location:
 print ("Welcome to Hunt the Wumpus!")
 print ("You can see", len(cave_numbers), "caves")
 print ("To play, just type the number")
-print ("of the cave you wish to enter next")
+print ("of the cave you wish to enter next.")
 
 while 1:
     print_location(player_location)
